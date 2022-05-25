@@ -14,7 +14,7 @@ function diff(a, b) {
 
 module.exports = (core, pixmap) => {
 	const palette = core.canvas.palette;
-	const percent = core.size / 100;
+	const percent = pixmap.width / 100;
 	for (var x = 0; x < pixmap.width; x++) {
 		core.stage = "RGB Indexing: " + Math.floor(x / percent) + "%";
 		for (var y = 0; y < pixmap.height; y++) {
@@ -25,6 +25,7 @@ module.exports = (core, pixmap) => {
 				let h = diff(pixel, other);
 				if (h < egg) {
 					closest = other;
+					egg = h;
 				}
 			}
 

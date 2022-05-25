@@ -16,7 +16,7 @@ module.exports = (core, pixmap) => {
 		palette[i] = Color.RGBtoHSV(tmp);
 	}
 
-	const percent = core.size / 100;
+	const percent = pixmap.width / 100;
 	for (var x = 0; x < pixmap.width; x++) {
 		core.stage = "HSV Indexing: " + Math.floor(x / percent) + "%";
 		for (var y = 0; y < pixmap.height; y++) {
