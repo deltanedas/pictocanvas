@@ -1,6 +1,6 @@
 const ui = require("ui-lib/library");
 
-const core = require("pictologic/core");
+const core = require("pictocanvas/core");
 
 var ptl;
 
@@ -24,7 +24,7 @@ ui.onLoad(() => {
 	ptl.cont.row();
 
 	ptl.cont.button("Select Image", () => {
-		Vars.platform.showFileChooser(false, "png", file => {
+		Vars.platform.showFileChooser(false, ".png", file => {
 			try {
 				const bytes = file.readToBytes();
 				core.image = new Pixmap(bytes);
