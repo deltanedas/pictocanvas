@@ -2,17 +2,19 @@ const ui = global.ui;
 const indexer = require("pictocanvas/indexer");
 
 const core = {
+	// TODO: settings dialog again yes
+	canvas: Blocks.canvas,
+	size: Blocks.canvas.canvasSize,
 	hsv: false,
+
 	stage: "",
 	image: null
 };
 
-// canvas to use, not configurable yes
-const canvas = Blocks.canvas;
-const size = canvas.canvasSize;
-
 core.export = () => {
 	const pixmap = core.image;
+	const canvas = core.canvas;
+	const size = core.size;
 	// image size -> highest multiple of canvases
 	const width = Math.ceil(pixmap.width / size);
 	const height = Math.ceil(pixmap.height / size);
