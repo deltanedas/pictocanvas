@@ -29,7 +29,7 @@ core.export = () => {
 			// add canvas to the schematic
 			let build = canvas.newBuilding();
 			// get max 12x12 region of the image
-			let region = pixmap.crop(x * size, y * size, size, size);
+			let region = pixmap.crop(x * size, (height - y - 1) * size, size, size);
 			// convert pixel data of the region
 			let bytes = build.packPixmap(region);
 			let stile = new Schematic.Stile(canvas, x * 2, y * 2, bytes, 0);

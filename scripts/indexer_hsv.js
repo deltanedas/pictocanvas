@@ -1,5 +1,6 @@
 function diff(a, b) {
-	const dh = Math.abs(a[0] - b[0]),
+	// hue is more important than others
+	const dh = Math.abs(a[0] - b[0]) * 2,
 		ds = Math.abs(a[1] - b[1]),
 		dv = Math.abs(a[2] - b[2]);
 	return dh + ds + dv;
@@ -12,8 +13,9 @@ module.exports = (core, pixmap) => {
 	const rgbPalette = core.canvas.palette;
 	// convert palette to hsv
 	for (var i in rgbPalette) {
-		tmp.set(rgbPalette[i]);
-		palette[i] = Color.RGBtoHSV(tmp);
+		let raw = rgbPalette[i];
+		tmp.set(raw);
+		palette[i] = [raw, Color.RGBtoHSV(tmp)];
 	}
 
 	const percent = pixmap.width / 100;
@@ -24,11 +26,11 @@ module.exports = (core, pixmap) => {
 			var pixel = tmp.set(raw);
 			pixel = Color.RGBtoHSV(pixel);
 
-			var closest = null, egg = 1000;
+			var closest = null, egg = 10000;
 			for (var other of palette) {
-				let h = diff(pixel, other);
+				let h = diff(pixel, other[1]);
 				if (h < egg) {
-					closest = other;
+					closest = other[0];
 				}
 			}
 
