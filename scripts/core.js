@@ -5,9 +5,6 @@ const core = {
 	image: null
 };
 
-const stile = (tile, config) => new Schematic.Stile(tile.block(),
-	tile.x, tile.y, config, 0);
-
 // canvas to use, not configurable yes
 const canvas = Blocks.canvas;
 const size = canvas.canvasSize;
@@ -19,18 +16,17 @@ core.export = () => {
 	const height = Math.ceil(pixmap.height / size);
 
 	core.stage = "Building...";
-	const tiles = Seq.new();
+	const tiles = new Seq();
 	for (var y = 0; y < height; y++) {
 		for (var x = 0; x < width; x++) {
-			// get max 12x12 region of the image
-			const region = pixmap.crop(x * size, y * size, size, size);
-			// convert pixel data of the region
-			const bytes = CanvasBlock.CanvasBuild.packPixmap(region);
-
 			// add canvas to the schematic
-			const build = canvas.newBuilding();
-			build.tile = new Tile(x * 2, y * 2, Blocks.stone, Blocks.air, canvas);
-			tiles.add(stile(build.tile, bytes));
+			let build = canvas.newBuilding();
+			// get max 12x12 region of the image
+			let region = pixmap.crop(x * size, y * size, size, size);
+			// convert pixel data of the region
+			let bytes = build.packPixmap(region);
+			let stile = new Schematic.Stile(canvas, x * 2, y * 2, bytes, 0);
+			tiles.add(stile);
 		}
 	}
 
