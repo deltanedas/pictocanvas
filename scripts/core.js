@@ -1,6 +1,7 @@
 const ui = global.ui;
 
 const core = {
+	hsv: false,
 	stage: "",
 	image: null
 };
@@ -14,6 +15,9 @@ core.export = () => {
 	// image size -> highest multiple of canvases
 	const width = Math.ceil(pixmap.width / size);
 	const height = Math.ceil(pixmap.height / size);
+
+	core.stage = "Indexing...";
+	indexer(pixmap);
 
 	core.stage = "Building...";
 	const tiles = new Seq();
