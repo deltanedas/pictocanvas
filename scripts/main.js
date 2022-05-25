@@ -24,9 +24,9 @@ ui.onLoad(() => {
 	ptl.cont.row();
 
 	ptl.cont.button("Select Image", () => {
-		Vars.platform.showFileChooser(false, ".png", file => {
+		Vars.platform.showFileChooser(false, "png", file => {
 			try {
-				const bytes = file.readToBytes();
+				const bytes = file.readBytes();
 				core.image = new Pixmap(bytes);
 			} catch (e) {
 				ui.showError("Failed to load source image", e);
@@ -51,6 +51,4 @@ ui.onLoad(() => {
 			}
 		}, "PicToCanvas worker").start();
 	}).disabled(() => !core.image || core.stage != "");
-
-	core.build();
 });
