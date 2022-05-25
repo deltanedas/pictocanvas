@@ -20,7 +20,7 @@ module.exports = (core, pixmap) => {
 	for (var x = 0; x < pixmap.width; x++) {
 		core.stage = "HSV Indexing: " + Math.floor(x / percent) + "%";
 		for (var y = 0; y < pixmap.height; y++) {
-			var raw = pixmap.getPixel(x, y);
+			var raw = pixmap.get(x, y);
 			var pixel = tmp.set(raw);
 			pixel = Color.RGBtoHSV(pixel);
 
@@ -32,7 +32,7 @@ module.exports = (core, pixmap) => {
 				}
 			}
 
-			pixmap.draw(x, y, closest);
+			pixmap.set(x, y, closest);
 		}
 	}
 };

@@ -18,7 +18,7 @@ module.exports = (core, pixmap) => {
 	for (var x = 0; x < pixmap.width; x++) {
 		core.stage = "RGB Indexing: " + Math.floor(x / percent) + "%";
 		for (var y = 0; y < pixmap.height; y++) {
-			var pixel = pixmap.getPixel(x, y);
+			var pixel = pixmap.get(x, y);
 
 			var closest = null, egg = 1000;
 			for (var other of palette) {
@@ -28,7 +28,7 @@ module.exports = (core, pixmap) => {
 				}
 			}
 
-			pixmap.draw(x, y, closest);
+			pixmap.set(x, y, closest);
 		}
 	}
 };
