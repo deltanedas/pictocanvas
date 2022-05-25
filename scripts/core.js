@@ -1,4 +1,5 @@
 const ui = global.ui;
+const indexer = require("pictocanvas/indexer");
 
 const core = {
 	hsv: false,
@@ -17,7 +18,7 @@ core.export = () => {
 	const height = Math.ceil(pixmap.height / size);
 
 	core.stage = "Indexing...";
-	indexer(pixmap);
+	indexer(core, pixmap);
 
 	core.stage = "Building...";
 	const tiles = new Seq();
