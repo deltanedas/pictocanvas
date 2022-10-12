@@ -1,11 +1,11 @@
 function diff(a, b) {
-	const ar = (a >> 16) & 0xFF,
-		ag = (a >> 8) & 0xFF,
-		ab = a & 0xFF;
+	const ar = (a >> 24) & 0xFF,
+		ag = (a >> 16) & 0xFF,
+		ab = (a >> 8) & 0xFF;
 	// get in
-	const br = (b >> 16) & 0xFF,
-		bg = (b >> 8) & 0xFF,
-		bb = b & 0xFF;
+	const br = (b >> 24) & 0xFF,
+		bg = (b >> 16) & 0xFF,
+		bb = (b >> 8) & 0xFF;
 	const dr = Math.abs(ar - br),
 		dg = Math.abs(ag - bg),
 		db = Math.abs(ab - bb);
