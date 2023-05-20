@@ -1,7 +1,7 @@
 // breakingfunny.com
 Blocks.canvas.buildVisibility = BuildVisibility.shown;
 
-const ui = require("ui-lib/library");
+const ui = require("ui_lib/library");
 
 const core = require("pictocanvas/core");
 
