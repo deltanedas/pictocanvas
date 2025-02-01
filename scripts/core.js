@@ -19,7 +19,7 @@ core.export = () => {
 	const size = core.size;
 
 	core.stage = "Resizing...";
-    if(core.resizeWidth && !isNaN(core.resizeWidth) && core.resizeWidth > 0){
+	if(core.resizeWidth && !isNaN(core.resizeWidth) && core.resizeWidth > 0){
 		const newWidth = core.resizeWidth * core.size;
 		if(pixmap.width !== newWidth){
 			let ratio = newWidth / pixmap.width;
