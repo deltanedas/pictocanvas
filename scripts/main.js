@@ -21,20 +21,32 @@ ui.onLoad(() => {
 
 	ptl.cont.add("[coral]1.[] Select a PNG image.");
 	ptl.cont.row();
-	ptl.cont.add("[coral]2.[] Click [stat]Export[] to create a schematic.");
+	ptl.cont.add("[coral]2.[] Optionally, enter a new width to resize the image.");
+	ptl.cont.row();
+	ptl.cont.add("[coral]3.[] Click [stat]Export[] to create a schematic.");
 	ptl.cont.row();
 	ptl.cont.add("[coral]Please dont use this for furry/weeb shit thank you");
 	ptl.cont.row();
 
+	ptl.cont.add("Image width (size in canvases, -1 to disable)").left();
+	ptl.cont.field("-1", (text) => {
+		try {
+			core.resizeWidth = parseInt(text);
+		} catch (e) {
+			core.resizeWidth = null;
+		}
+	});
+	ptl.cont.row();
+
 	ptl.cont.button("Select Image", () => {
-		Vars.platform.showFileChooser(false, "png", file => {
+		Vars.platform.showMultiFileChooser(file => {
 			try {
 				const bytes = file.readBytes();
 				core.image = new Pixmap(bytes);
 			} catch (e) {
 				ui.showError("Failed to load source image", e);
 			}
-		});
+		},"png","jpg");
 	}).size(240, 50);
 	ptl.cont.row();
 

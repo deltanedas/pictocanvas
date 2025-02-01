@@ -8,13 +8,30 @@ const core = {
 	hsv: false,
 
 	stage: "",
-	image: null
+	image: null,
+
+	resizeWidth: -1, 
 };
 
 core.export = () => {
-	const pixmap = core.image;
+	let pixmap = core.image;
 	const canvas = core.canvas;
 	const size = core.size;
+
+	core.stage = "Resizing...";
+    if(core.resizeWidth && !isNaN(core.resizeWidth) && core.resizeWidth > 0){
+		const newWidth = core.resizeWidth * core.size;
+		if(pixmap.width !== newWidth){
+			let ratio = newWidth / pixmap.width;
+			let newHeight = Math.floor(pixmap.height * ratio);
+
+			let newPixmap = new Pixmap(newWidth, newHeight);
+			newPixmap.draw(pixmap, 0, 0, pixmap.width, pixmap.height, 0, 0, newWidth, newHeight);
+			pixmap.dispose();
+			pixmap = newPixmap;
+		}
+	}
+
 	// image size -> highest multiple of canvases
 	const width = Math.ceil(pixmap.width / size);
 	const height = Math.ceil(pixmap.height / size);
@@ -49,6 +66,9 @@ core.export = () => {
 	Vars.control.input.useSchematic(schem);
 
 	core.stage = "";
+	// Dispose of the image
+	core.image.dispose();
+	core.image = null;
 };
 
 module.exports = core;
