@@ -11,7 +11,7 @@ function diff(a, b) {
 	const dr = ar - br,
 		dg = ag - bg,
 		db = ab - bb;
-	return Math.sqrt(dr * dr + dg * dg + db * db);
+	return dr * dr + dg * dg + db * db;
 }
 
 module.exports = (core, pixmap) => {
@@ -22,7 +22,7 @@ module.exports = (core, pixmap) => {
 		for (var y = 0; y < pixmap.height; y++) {
 			var pixel = pixmap.get(x, y);
 
-			var closest = null, egg = 1000;
+			var closest = null, egg = Number.MAX_VALUE;
 			for (var other of palette) {
 				let h = diff(pixel, other);
 				if (h < egg) {

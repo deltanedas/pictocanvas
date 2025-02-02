@@ -6,11 +6,12 @@ const core = {
 	canvas: Blocks.canvas,
 	size: Blocks.canvas.canvasSize,
 	hsv: false,
+	type: 3,
 
 	stage: "",
 	image: null,
 
-	resizeWidth: -1, 
+	resizeWidth: 0, 
 };
 
 core.export = () => {
@@ -20,15 +21,11 @@ core.export = () => {
 
 	core.stage = "Resizing...";
 	if(core.resizeWidth && !isNaN(core.resizeWidth) && core.resizeWidth > 0){
-		const newWidth = core.resizeWidth * core.size;
-		if(pixmap.width !== newWidth){
+		const  newWidth = core.resizeWidth * core.size;
+		if (pixmap.width != newWidth) {
 			let ratio = newWidth / pixmap.width;
-			let newHeight = Math.floor(pixmap.height * ratio);
-
-			let newPixmap = new Pixmap(newWidth, newHeight);
-			newPixmap.draw(pixmap, 0, 0, pixmap.width, pixmap.height, 0, 0, newWidth, newHeight);
-			pixmap.dispose();
-			pixmap = newPixmap;
+			core.stage = "Scaling...";
+			pixmap = Pixmaps.scale(pixmap, ratio, ratio);
 		}
 	}
 
